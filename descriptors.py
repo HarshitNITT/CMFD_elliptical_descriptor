@@ -1,8 +1,8 @@
 import numpy as np
 import numpy.linalg as LA
 
-from gaussian_filter import gaussian_filter
-from orientation import quantize_orientation, cart_to_polar_grad
+from gaussian_filter import gaussianFilter
+from orientation import quantizeOrientation, toPolarGrad
 
 def get_patch_grads(p):
     r1 = np.zeros_like(p)
@@ -79,7 +79,7 @@ def get_local_descriptors(kps, octave, w=16, num_subregion=4, num_bin=8):
             if l == 0: kernel = kernel[kernel.shape[1]-dy.shape[1]:]
             else: kernel = kernel[:dy.shape[1]]
 
-        m, theta = cart_to_polar_grad(dx, dy)
+        m, theta = toPolarGrad(dx, dy)
         
 
         subregion_w = w//num_subregion

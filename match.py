@@ -8,9 +8,9 @@ import matplotlib.pyplot as plt
 import pickle
 from os.path import isfile
 
-from sift import SIFT
+from sift import Improved_SIFT
 
-def compute_homography(pts1, pts2):
+def homographyComputation(pts1, pts2):
 	pts1 = np.concatenate((pts1, np.ones((len(pts1), 1))), axis=1)
 	pts2 = np.concatenate((pts2, np.ones((len(pts2), 1))), axis=1)
 	
@@ -32,7 +32,7 @@ def compute_homography(pts1, pts2):
 
 	return H
 
-def get_matches(feats1, feats2, ratio=0.8):
+def findMatches(feats1, feats2, ratio=0.8):
 	idxs1, idxs2 = [], []
 	for i, feat in enumerate(feats1):
 		distances = LA.norm(feats2-feat, axis=1)
@@ -45,23 +45,23 @@ def get_matches(feats1, feats2, ratio=0.8):
 
 	return idxs1, idxs2
 
-def transform_pts(pts, H):
+def pointTransformation(pts, H):
 	pts = np.concatenate((pts, np.ones((len(pts), 1))), axis=1)
 	trans = pts.dot(H.T)
 	return np.array([trans[:,0]/trans[:,2], trans[:,1]/trans[:,2]]).T
 
-def find_good_homography(kps1, kps2, n_trials=500):
+def optimalHomography(kps1, kps2, n_trials=500):
 	best_H = None
 	max_inliers = -1
 
 	def calculate_num_inliers(H, pts1, pts2):
-		pts2_hat = transform_pts(pts1, H)
+		pts2_hat = pointTransformation(pts1, H)
 		distances = LA.norm(pts2-pts2_hat, axis=1)
 		return np.sum(distances<5)
 
 	for _ in range(n_trials):
 		chosen_idxs = np.random.choice(range(len(kps1)), 4, replace=False)
-		H = compute_homography(kps1[chosen_idxs], kps2[chosen_idxs])
+		H = homographyComputation(kps1[chosen_idxs], kps2[chosen_idxs])
 
 		num_inliers = calculate_num_inliers(H, kps1, kps2)
 		if num_inliers > max_inliers:
@@ -70,14 +70,14 @@ def find_good_homography(kps1, kps2, n_trials=500):
 
 	return best_H
 
-def get_transform(im1, im2, kps1, kps2, feats1, feats2, ratio=0.8, ret_idxs=False):
-	idxs1, idxs2 = get_matches(feats1, feats2, ratio=ratio)
+def getTransform(im1, im2, kps1, kps2, feats1, feats2, ratio=0.8, ret_idxs=False):
+	idxs1, idxs2 = findMatches(feats1, feats2, ratio=ratio)
 	kps1, kps2 = kps1[idxs1,:-2], kps2[idxs2,:-2]
 	if ret_idxs:
-		return find_good_homography(kps1, kps2), idxs1, idxs2
-	return find_good_homography(kps1, kps2)
+		return optimalHomography(kps1, kps2), idxs1, idxs2
+	return optimalHomography(kps1, kps2)
 
-def extract_or_load_features(im, kp_fname, feat_fname):
+def getFeatures(im, kp_fname, feat_fname):
     if isfile(kp_fname) and isfile(feat_fname):
         #return pickle.load(open(kp_fname, 'rb'))[0], pickle.load(open(feat_fname, 'rb'))[0]
         kps, feats = pickle.load(open(kp_fname, 'rb')), pickle.load(open(feat_fname, 'rb'))
@@ -85,12 +85,13 @@ def extract_or_load_features(im, kp_fname, feat_fname):
         feats = np.concatenate(feats, axis=0)
         return kps, feats
 
-    detector = SIFT(im)
+    detector = Improved_SIFT(im)
     _ = detector.get_features()
     pickle.dump(detector.kp_pyr, open(kp_fname, 'wb'))
     pickle.dump(detector.feats, open(feat_fname, 'wb'))
     return np.concatenate(detector.kp_pyr, axis=0), np.concatenate(detector.feats, axis=0)
 
+"""
 if __name__ == '__main__':
 	ims = []
 	kp_pyrs = []
@@ -104,12 +105,12 @@ if __name__ == '__main__':
 
 	for ix in [i, j]:
 		ims.append(imread(im_dir+im_fmt % ix))
-		kps, feats = extract_or_load_features(ims[-1], feat_dir+'/kp_pyr%d.pkl' % ix, feat_dir+'/feat_pyr%d.pkl' % ix)
+		kps, feats = getFeatures(ims[-1], feat_dir+'/kp_pyr%d.pkl' % ix, feat_dir+'/feat_pyr%d.pkl' % ix)
 		kp_pyrs.append(kps)
 		feat_pyrs.append(feats)
 
 	im1, im2 = ims[0], ims[1]
-	H, ix1, ix2 = get_transform(im1, im2, kp_pyrs[0], kp_pyrs[1], feat_pyrs[0], feat_pyrs[1], ret_idxs=True)
+	H, ix1, ix2 = getTransform(im1, im2, kp_pyrs[0], kp_pyrs[1], feat_pyrs[0], feat_pyrs[1], ret_idxs=True)
 	kps1 = kp_pyrs[0][ix1]
 	kps2 = kp_pyrs[1][ix2]
 
@@ -131,3 +132,4 @@ if __name__ == '__main__':
 	ax[0,1].axis('off')
 
 	plt.show()
+"""

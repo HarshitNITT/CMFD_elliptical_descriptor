@@ -3,7 +3,7 @@ from numpy import linalg as LA
 
 from gaussian_filter import gaussian_filter
 
-def cart_to_polar_grad(dx, dy):
+def toPolarGrad(dx, dy):
     m = np.sqrt(dx**2 + dy**2)
     theta = (np.arctan2(dy, dx)+np.pi) * 180/np.pi
     return m, theta
@@ -11,13 +11,13 @@ def cart_to_polar_grad(dx, dy):
 def get_grad(L, x, y):
     dy = L[min(L.shape[0]-1, y+1),x] - L[max(0, y-1),x]
     dx = L[y,min(L.shape[1]-1, x+1)] - L[y,max(0, x-1)]
-    return cart_to_polar_grad(dx, dy)
+    return toPolarGrad(dx, dy)
 
-def quantize_orientation(theta, num_bins):
+def quantizeOrientation(theta, num_bins):
     bin_width = 360//num_bins
     return int(np.floor(theta)//bin_width)
 
-def fit_parabola(hist, binno, bin_width):
+def fitParabola(hist, binno, bin_width):
     centerval = binno*bin_width + bin_width/2.
 
     if binno == len(hist)-1: rightval = 360 + bin_width/2.
@@ -39,7 +39,7 @@ def fit_parabola(hist, binno, bin_width):
     if x[0] == 0: x[0] = 1e-6
     return -x[1]/(2*x[0])
 
-def assign_orientation(kps, octave, num_bins=36):
+def orientationAssignment(kps, octave, num_bins=36):
     new_kps = []
     bin_width = 360//num_bins
 
@@ -64,17 +64,17 @@ def assign_orientation(kps, octave, num_bins=36):
                 m, theta = get_grad(L, x, y)
                 weight = kernel[oy+w, ox+w] * m
 
-                bin = quantize_orientation(theta, num_bins)
+                bin = quantizeOrientation(theta, num_bins)
                 hist[bin] += weight
 
         max_bin = np.argmax(hist)
-        new_kps.append([kp[0], kp[1], kp[2], fit_parabola(hist, max_bin, bin_width)])
+        new_kps.append([kp[0], kp[1], kp[2], fitParabola(hist, max_bin, bin_width)])
 
         max_val = np.max(hist)
         for binno, val in enumerate(hist):
             if binno == max_bin: continue
 
             if .8 * max_val <= val:
-                new_kps.append([kp[0], kp[1], kp[2], fit_parabola(hist, binno, bin_width)])
+                new_kps.append([kp[0], kp[1], kp[2], fitParabola(hist, binno, bin_width)])
 
     return np.array(new_kps)
