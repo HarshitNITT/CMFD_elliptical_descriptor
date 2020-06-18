@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='PySIFT')
 	parser.add_argument('--input', type=str, dest='input_fname')
-	parser.add_argument('--output', type=str, dest='output_prefix', help='The prefix for the kp_pyr and feat_pyr files generated')
+	parser.add_argument('--output', type=str, dest='output_prefix')
 	args = parser.parse_args()
 
 	im = imread(args.input_fname)

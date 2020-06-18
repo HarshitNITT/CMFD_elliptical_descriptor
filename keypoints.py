@@ -12,6 +12,7 @@ def get_candidate_keypoints(D, w=16):
 		for j in range(w//2+1, D.shape[1]-w//2-1):
 			for k in range(1, D.shape[2]-1): 
 				patch = D[i-1:i+2, j-1:j+2, k-1:k+2]
+				#here the central point will have index 13
 				if np.argmax(patch) == 13 or np.argmin(patch) == 13:
 					candidates.append([i, j, k])
 
@@ -35,7 +36,7 @@ def localize_keypoint(D, x, y, s):
 		[dxy, dyy, dys],
 		[dxs, dys, dss]])
 	
-	offset = -LA.inv(HD).dot(J)	# I know you're supposed to do something when an offset dimension is >0.5 but I couldn't get anything to work.
+	offset = -LA.inv(HD).dot(J)	
 	return offset, J, HD[:2,:2], x, y, s
 
 def find_keypoints_for_DoG_octave(D, R_th, t_c, w):
@@ -57,7 +58,7 @@ def find_keypoints_for_DoG_octave(D, R_th, t_c, w):
 		if R > R_th: continue
 
 		kp = np.array([x, y, s]) + offset
-		if kp[1] >= D.shape[0] or kp[0] >= D.shape[1]: continue # throw out boundary points because I don't want to deal with them
+		if kp[1] >= D.shape[0] or kp[0] >= D.shape[1]: continue # throw out boundary point
 
 		keypoints.append(kp)
 
