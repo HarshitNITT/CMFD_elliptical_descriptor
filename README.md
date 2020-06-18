@@ -7,6 +7,7 @@ First clone the project in your local machine using:
 For python code
 ~~~
 git clone https://github.com/HarshitNITT/CMFD_elliptical_descriptor
+cd CMFD_elliptical_descriptor
 cd code
 open jupyter notebook 
 open main.ipynb
