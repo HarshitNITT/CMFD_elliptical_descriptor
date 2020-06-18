@@ -8,16 +8,17 @@
    },
    "outputs": [],
    "source": [
+    "#1.16.6 try this version\n",
+    "\n",
     "import numpy as np\n",
-    "np.__version__"
+    "np.__version__\n"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": null,
    "metadata": {
-    "collapsed": true,
-    "scrolled": true
+    "collapsed": true
    },
    "outputs": [],
    "source": [
@@ -31,9 +32,8 @@
     "\n",
     "import matplotlib.pyplot as plt\n",
     "\n",
-    "#input image file name to test\n",
-    "#here coin.png is used\n",
-    "im = imread(\"coin.png\")\n",
+    "\n",
+    "im = imread(\"test.jpg\")\n",
     "\n",
     "sift_detector = SIFT(im)\n",
     "_ = sift_detector.get_features()\n",
@@ -42,7 +42,7 @@
     "if not isdir('results'):\n",
     "    os.mkdir('results')\n",
     "\n",
-    "\n",
+    "# pickle.dump(sift_detector.kp_pyr, open('results/%s_kp_pyr.pkl' % \"\", 'wb'))\n",
     "_, ax = plt.subplots(1, sift_detector.num_octave)\n",
     "\n",
     "for i in range(sift_detector.num_octave):\n",
@@ -60,12 +60,11 @@
    "cell_type": "code",
    "execution_count": null,
    "metadata": {
-    "collapsed": true,
-    "scrolled": true
+    "collapsed": true
    },
    "outputs": [],
    "source": [
-    "print sift_detector.get_features()[0]\n"
+    "print sift_detector.get_features()[0]"
    ]
   },
   {
@@ -81,7 +80,7 @@
     "from collections import Counter\n",
     "# X=np.array(kp_pyr[0][:,0],kp_pyr[0][:,1])\n",
     "clustering = AgglomerativeClustering(n_clusters=3).fit(kp_pyr[1][:,0:1])\n",
-    "print Counter(clustering.labels_)\n"
+    "print Counter(clustering.labels_)"
    ]
   },
   {
@@ -106,7 +105,7 @@
    "source": [
     "l.append(len(kp_pyr[1]))\n",
     "l.append(len(kp_pyr[2]))\n",
-    "l.append(len(kp_pyr[3]))"
+    "l.append(len(kp_pyr[3]))\n"
    ]
   },
   {
@@ -117,7 +116,6 @@
    },
    "outputs": [],
    "source": [
-    "\n",
     "l"
    ]
   },
@@ -129,13 +127,11 @@
    },
    "outputs": [],
    "source": [
-    "'''\n",
     "import matplotlib.pyplot as plt\n",
     "fig = plt.figure()\n",
     "ax = fig.add_axes([0,0,1,1])\n",
     "ax.bar([1,2,3,4],l)\n",
-    "plt.show()\n",
-    "'''"
+    "plt.show()"
    ]
   },
   {
@@ -146,36 +142,31 @@
    },
    "outputs": [],
    "source": [
-    "\"\"\"\n",
     "import matplotlib.pyplot as plt\n",
     "fig = plt.figure()\n",
     "ax = fig.add_axes([0,0,1,1])\n",
-    "\n",
+    "ax.plot([0.6,0.7,0.8,0.9],[40,50,55,70])\n",
     "plt.xlabel(\"Threshold\")\n",
     "plt.ylabel(\"Number of Keypoints\")\n",
-    "plt.show()\n",
-    "\"\"\""
+    "plt.show()"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": null,
    "metadata": {
-    "collapsed": true,
-    "scrolled": false
+    "collapsed": true
    },
    "outputs": [],
    "source": [
-    "#give octave number in square \n",
-    "descriptor=sift_detector.get_features()[0]\n"
+    "descriptor=sift_detector.get_features()[1]"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": null,
    "metadata": {
-    "collapsed": true,
-    "scrolled": false
+    "collapsed": true
    },
    "outputs": [],
    "source": [
@@ -191,7 +182,6 @@
     "    res90=[]\n",
     "    res180=[]\n",
     "    res270=[]\n",
-    "    #select the octave number to work on\n",
     "    octave=0\n",
     "    for j in range(len(descriptor)):\n",
     "        if i==j:\n",
@@ -254,10 +244,8 @@
     "#         print rat\n",
     "        ans.append(rat)\n",
     "        draw.line((kp_pyr[temp][i][0]*(2**temp), kp_pyr[temp][i][1]*(2**temp), kp_pyr[temp][res270[0][2]][0]*(2**temp), kp_pyr[temp][res270[0][2]][1]*(2**temp)), fill=128)\n",
-    "\n",
-    "        \n",
-    "#give output image name    \n",
-    "im.save(\"coin_demo.png\")\n",
+    "    \n",
+    "im.save(\"drawn_grid.png\")\n",
     "print len(ans)"
    ]
   },
@@ -268,16 +256,15 @@
     "collapsed": true
    },
    "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": []
+   "source": [
+    "'''\n",
+    "import matplotlib.pyplot as plt\n",
+    "\n",
+    "plt.plot([0.80, 0.82, 0.84, 0.86,0.88], [14,19,27,29,45])\n",
+    "plt.plot([0.80, 0.82, 0.84, 0.86,0.88], [55,66,91,148,228])\n",
+    "plt.show()\n",
+    "'''"
+   ]
   },
   {
    "cell_type": "code",
@@ -287,7 +274,31 @@
    },
    "outputs": [],
    "source": [
-    "#using KUM value API\n",
+    "'''\n",
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt\n",
+    "data = [[30, 25, 50, 20],\n",
+    "[40, 23, 51, 17],\n",
+    "[35, 22, 45, 19]]\n",
+    "X = np.arange(4)\n",
+    "fig = plt.figure()\n",
+    "ax = fig.add_axes([0,0,1,1])\n",
+    "ax.set_xlabel('threshold')\n",
+    "ax.set_ylabel('Number of matched points')\n",
+    "ax.bar([0.80, 0.82, 0.84, 0.86,0.88], [73,78,145,199,296], color = 'b', width = 0.005)\n",
+    "ax.bar([0.805, 0.825, 0.845, 0.865,0.885], [99,115,163,251,320], color = 'g', width = 0.005)\n",
+    "plt.show()\n",
+    "'''"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
     "def kum_value():\n",
     "    for i in range(1,length(kend),2):\n",
     "        si(ceil(kend(i)/6),ceil(kend(i+1)/6))= si(ceil(kend(i)/6),ceil(kend(i+1)/6))+1\n",
@@ -301,8 +312,7 @@
     "            kum=sqrt(kum_square/no_of_key_points)\n",
     "            thres=thres/2;\n",
     "            if kum <0.3\n",
-    "                break;\n",
-    "\n"
+    "                break;"
    ]
   },
   {
@@ -313,21 +323,23 @@
    },
    "outputs": [],
    "source": [
-    "#Descriptor API\n",
-    "for x in range(0,359,45 ):\n",
+    "for x=0:45:359\n",
     "        magcount=0\n",
-    "        for i in range(-4,4):\n",
-    "            for j in range(-floor(sqrt(16-i*i)),floor(sqrt(16-i*i))):\n",
+    "        for i in range(-4,4)\n",
+    "            for j in range(-floor(sqrt(16-i*i)),floor(sqrt(16-i*i)))\n",
     "                \n",
     "                ch1=-180+x\n",
     "                ch2=-180+45+x\n",
-    "                if (ch1<0  ||  ch2<0):\n",
-    "                    if ((k1+i)>0 and (j1+j)>0 and (k1+i)<m and (j1+j)<n):\n",
+    "                if ch1<0  ||  ch2<0\n",
+    "                    if (k1+i)>0 && (j1+j)>0 \n",
+    "                    && (k1+i)<m && (j1+j)<n:\n",
     "                        \n",
-    "                        if (abs(oric(k1+i,j1+j))<abs(ch1) and abs(oric(k1+i,j1+j))>=abs(ch2)):\n",
-    "                            if (oric(k1+i,j1+j))>=(ch1) and oric(k1+i,j1+j)<(ch2)):\n",
-    "                                if i<=0 and j<=0:\n",
-    "                                    if abs(i)>abs(j):\n",
+    "                        if abs(oric(k1+i,j1+j))<abs(ch1) \n",
+    "                        && abs(oric(k1+i,j1+j))>=abs(ch2):\n",
+    "                            if (oric(k1+i,j1+j))>=(ch1) \n",
+    "                            && oric(k1+i,j1+j)<(ch2):\n",
+    "                                if i<=0 && j<=0:\n",
+    "                                    if abs(i)>abs(j)\n",
     "#                                         y=2 finding x\n",
     "                                        if i*i+j*j<=1:\n",
     "                                            c(2*8+floor(x/45)+1)\n",
@@ -343,7 +355,7 @@
     "                                            =c(14*8+floor(x/45)+1)+mag(k1+i,j1+j) \n",
     "                                else:\n",
     "#                                 y=1 finding x\n",
-    "                                    if (i*i+j*j <=1):\n",
+    "                                    if i*i+j*j <=1:\n",
     "                                        c(1*8+floor(x/45)+1)=\n",
     "                                        c(1*8+floor(x/45)+1)+mag(k1+i,j1+j)\n",
     "                                    \n",
@@ -359,10 +371,10 @@
     "                                        c(13*8+floor(x/45)+1)\n",
     "                                        =c(13*8+floor(x/45)+1)+mag(k1+i,j1+j);   \n",
     "\n",
-    "                            if (i>=0 and j<=0):\n",
-    "                                if( abs(i)>=abs(j)):\n",
-    "                               #y=0 finding x\n",
-    "                                    if (i*i+j*j<=1):\n",
+    "                            if i>=0 && j<=0:\n",
+    "                                if abs(i)>=abs(j)\n",
+    "                               %y=0 finding x\n",
+    "                                    if i*i+j*j<=1:\n",
     "                                        \n",
     "                                        c(0*8+floor(x/45)+1)\n",
     "                                        =c(0*8+floor(x/45)+1)+mag(k1+i,j1+j);\n",
@@ -405,8 +417,8 @@
     "                                \n",
     "                            \n",
     "                        \n",
-    "                            if (i>=0 and j>=0):\n",
-    "                                if (abs(i)>abs(j)):\n",
+    "                            if i>=0 && j>=0:\n",
+    "                                if abs(i)>abs(j):\n",
     "                                \n",
     "                                    if i*i+j*j<=1:\n",
     "                                      \n",
@@ -435,36 +447,8 @@
     "                                    \n",
     "                                    elif i*i+j*j <=4:\n",
     "                                        c(7*8+floor(x/45)+1)\n",
-    "                                        =c(7*8+floor(x/45)+1)+mag(k1+i,j1+j);\n",
-    "                                   "
+    "                                        =c(7*8+floor(x/45)+1)+mag(k1+i,j1+j);"
    ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": []
   },
   {
    "cell_type": "code",
