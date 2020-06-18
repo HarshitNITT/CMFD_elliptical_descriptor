@@ -82,17 +82,16 @@ def detectKeypoints(DOG_Pyramid, R_th, t_c, w):
 #using KUM value API
 def kum_value():
     for i in range(1,length(kend),2):
-        si(ceil(kend(i)/6),ceil(kend(i+1)/6))= si(ceil(kend(i)/6),ceil(kend(i+1)/6))+1
+        si[ceil(kend[i]/6)][ceil(kend[i+1]/6)]= si[ceil(kend[i]/6)][ceil(kend[i+1]/6)+1]
         no_of_key_points=length(kend)/2;
         key_points_density=no_of_key_points/(ceil(n/6)*ceil(m/6));
         kum_square=0;
         for i in range(1,ceil(m/6)):
             for j in range(1,ceil(n/6)):
-                kum_square=kum_square+
-                (key_points_density-si(i,j))*(key_points_density-si(i,j))
+                kum_square=kum_square+(key_points_density-si[i][j])*(key_points_density-si[i][j])
             kum=sqrt(kum_square/no_of_key_points)
-            thres=thres/2;
-            if kum <0.3
+            thres=thres/2
+            if kum <0.3:
                 break;
 
 def elli_des():
@@ -103,121 +102,104 @@ def elli_des():
                 
                 ch1=-180+x
                 ch2=-180+45+x
-                if (ch1<0  ||  ch2<0):
+                if (ch1<0  or  ch2<0):
                     if ((k1+i)>0 and (j1+j)>0 and (k1+i)<m and (j1+j)<n):
                         
-                        if (abs(oric(k1+i,j1+j))<abs(ch1) and abs(oric(k1+i,j1+j))>=abs(ch2)):
-                            if (oric(k1+i,j1+j))>=(ch1) and oric(k1+i,j1+j)<(ch2)):
-                                if i<=0 and j<=0:
-                                    if abs(i)>abs(j):
-#                                         y=2 finding x
-                                        if i*i+j*j<=1:
-                                            c(2*8+floor(x/45)+1)
-                                            =c(2*8+floor(x/45)+1)+mag(k1+i,j1+j)
-                                        elif i*i+j*j <=4:
-                                            c(6*8+floor(x/45)+1)
-                                            =c(6*8+floor(x/45)+1)+mag(k1+i,j1+j)
-                                        elif i*i+j*j <=9: 
-                                            c(10*8+floor(x/45)+1)
-                                            =c(10*8+floor(x/45)+1)+mag(k1+i,j1+j)
-                                        elif i*i+j*j <=16: 
-                                            c(14*8+floor(x/45)+1)
-                                            =c(14*8+floor(x/45)+1)+mag(k1+i,j1+j) 
-                                else:
-#                                 y=1 finding x
-                                    if (i*i+j*j <=1):
-                                        c(1*8+floor(x/45)+1)=
-                                        c(1*8+floor(x/45)+1)+mag(k1+i,j1+j)
+                            if (abs(oric[k1+i][j1+j])<abs(ch1) and abs(oric[k1+i][j1+j])>=abs(ch2)):
+                                    if (oric[k1+i][j1+j])>=(ch1) and oric[k1+i][j1+j]<(ch2):
+                                        if i<=0 and j<=0:
+                                                if abs(i)>abs(j):
+#                                               y=2 finding x
+                                                    if i*i+j*j<=1:
+                                                            c[2*8+floor(x/45)+1]=c[2*8+floor(x/45)+1]+mag[k1+i][j1+j]
+                                                    elif i*i+j*j <=4:
+                                                            c[6*8+floor(x/45)+1]=c[6*8+floor(x/45)+1]+mag[k1+i][j1+j]
+                                                    elif i*i+j*j <=9: 
+                                                            c[10*8+floor(x/45)+1]=c[10*8+floor(x/45)+1]+mag[k1+i][j1+j]
+                                                    elif i*i+j*j <=16: 
+                                                            c[14*8+floor(x/45)+1]=c[14*8+floor(x/45)+1]+mag[k1+i][j1+j] 
+                                            else:
+#                                           y=1 finding x
+                                                    if (i*i+j*j <=1):
+                                                        c[1*8+floor(x/45)+1]=c[1*8+floor(x/45)+1]+mag[k1+i][j1+j]
                                     
-                                    elif i*i+j*j <=4:
-                                        c(5*8+floor(x/45)+1)
-                                        =c(5*8+floor(x/45)+1)+mag(k1+i,j1+j);
+                                                    elif i*i+j*j <=4:
+                                                        c[5*8+floor(x/45)+1]=c[5*8+floor(x/45)+1]+mag[k1+i][j1+j];
                                    
                                     
-                                    elif i*i+j*j <=9: 
-                                        c(9*8+floor(x/45)+1)
-                                        =c(9*8+floor(x/45)+1)+mag(k1+i,j1+j);
-                                    elif i*i+j*j<=16:
-                                        c(13*8+floor(x/45)+1)
-                                        =c(13*8+floor(x/45)+1)+mag(k1+i,j1+j);   
+                                                    elif i*i+j*j <=9: 
+                                                        c[9*8+floor(x/45)+1]=c[9*8+floor(x/45)+1]+mag[k1+i][j1+j];
+                                                    elif i*i+j*j<=16:
+                                                        c[13*8+floor(x/45)+1]=c[13*8+floor(x/45)+1]+mag[k1+i][j1+j];   
 
-                            if (i>=0 and j<=0):
+                                        if (i>=0 and j<=0):
                                 if( abs(i)>=abs(j)):
                                #y=0 finding x
                                     if (i*i+j*j<=1):
-                                        
-                                        c(0*8+floor(x/45)+1)
-                                        =c(0*8+floor(x/45)+1)+mag(k1+i,j1+j);
+                                    c[0*8+floor(x/45)+1]=c[0*8+floor(x/45)+1]+mag[k1+i][j1+j];
                                     
-                                    elif i*i+j*j <=4:
-                                        c(4*8+floor(x/45)+1)
-                                        =c(4*8+floor(x/45)+1)+mag(k1+i,j1+j);
+                                        elif i*i+j*j <=4:
+                                            c[4*8+floor(x/45)+1]=c[4*8+floor(x/45)+1]+mag[k1+i][j1+j];
                                    
                                     
-                                    elif i*i+j*j <= 9:
-                                        c(8*8+floor(x/45)+1)
-                                        =c(8*8+floor(x/45)+1)+mag(k1+i,j1+j);
+                                        elif i*i+j*j <= 9:
+                                            c[8*8+floor(x/45)+1]=c[8*8+floor(x/45)+1]+mag[k1+i][j1+j];
                            
                                 
-                                    elif i*i+j*j <=16:
-                                    c(12*8+floor(x/45)+1)
-                                    =c(12*8+floor(x/45)+1)+mag(k1+i,j1+j);   
-                                    end
+                                        elif i*i+j*j <=16:
+                                            c[12*8+floor(x/45)+1]=c[12*8+floor(x/45)+1]+mag[k1+i][j1+j];   
+                                    
                            
                                 else:
                                 #y= 1
                                     if i*i+j*j<=1:
-                                        c(1*8+floor(x/45)+1)
-                                        =c(1*8+floor(x/45)+1)+mag(k1+i,j1+j);
+                                            c[1*8+floor(x/45)+1]=c[1*8+floor(x/45)+1]+mag[k1+i][j1+j];
                                     
                                     elif i*i+j*j <=4:
-                                        c(5*8+floor(x/45)+1)
-                                        =c(5*8+floor(x/45)+1)+mag(k1+i,j1+j);
+                                            c[5*8+floor(x/45)+1]=c[5*8+floor(x/45)+1]+mag[k1+i][j1+j];
                                    
                                     
-                                    elif i*i+j*j <= 9:
-                                        c(9*8+floor(x/45)+1)
-                                        =c(9*8+floor(x/45)+1)+mag(k1+i,j1+j);
+                                        elif i*i+j*j <= 9:
+                                            c[9*8+floor(x/45)+1]=c[9*8+floor(x/45)+1]+mag[k1+i][j1+j];
                                
                                 
-                                    elif i*i+j*j <=16:
-                                        c(13*8+floor(x/45)+1)
-                                        =c(13*8+floor(x/45)+1)+mag(k1+i,j1+j);   
+                                        elif i*i+j*j <=16:
+                                            c[13*8+floor(x/45)+1]=c[13*8+floor(x/45)+1]+mag[k1+i][j1+j];   
                                     
                                 
                             
                         
-                            if (i>=0 and j>=0):
+                        if (i>=0 and j>=0):
                                 if (abs(i)>abs(j)):
                                 
                                     if i*i+j*j<=1:
                                       
-                                        c(0*8+floor(x/45)+1)=
-                                        c(0*8+floor(x/45)+1)+mag(k1+i,j1+j);
+                                            c[0*8+floor(x/45)+1]=c[0*8+floor(x/45)+1]+mag[k1+i][j1+j];
                                     
-                                    elif i*i+j*j <=4:
-                                        c(4*8+floor(x/45)+1)
-                                        =c(4*8+floor(x/45)+1)+mag(k1+i,j1+j);
+                                        elif i*i+j*j <=4:
+                                            c[4*8+floor(x/45)+1]=c[4*8+floor(x/45)+1]+mag[k1+i][j1+j];
                                    
                                     
-                                    elif i*i+j*j <= 9:
-                                        c(8*8+floor(x/45)+1)
-                                        =c(8*8+floor(x/45)+1)+mag(k1+i,j1+j);
+                                        elif i*i+j*j <= 9:
+                                            c[8*8+floor(x/45)+1]=c[8*8+floor(x/45)+1]+mag[k1+i][j1+j];
                                
                                     
-                                    elif i*i+j*j <=16:
-                                        c(12*8+floor(x/45)+1)
-                                        =c(12*8+floor(x/45)+1)+mag(k1+i,j1+j);   
+                                        elif i*i+j*j <=16:
+                                            c[12*8+floor(x/45)+1]=c[12*8+floor(x/45)+1]+mag[k1+i][j1+j];   
 
                                 else:
                               
                                     if i*i+j*j <=1:
-                                        c(3*8+floor(x/45)+1)
-                                        =c(3*8+floor(x/45)+1)+mag(k1+i,j1+j);
+                                         c[3*8+floor(x/45)+1]=c[3*8+floor(x/45)+1]+mag[k1+i][j1+j];
                                     
-                                    elif i*i+j*j <=4:
-                                        c(7*8+floor(x/45)+1)
-                                        =c(7*8+floor(x/45)+1)+mag(k1+i,j1+j);
+                                        elif i*i+j*j <=4:
+                                            c[7*8+floor(x/45)+1]=c[7*8+floor(x/45)+1]+mag[k1+i][j1+j];
+                                elif i*i+j*j <= 9:
+                                            c[11*8+floor(x/45)+1]=c[11*8+floor(x/45)+1]+mag[k1+i][j1+j];
+                               
+                                    
+                                        elif i*i+j*j <=16:
+                                            c[15*8+floor(x/45)+1]=c[15*8+floor(x/45)+1]+mag[k1+i][j1+j]; 
 
 
 
@@ -486,4 +468,4 @@ class Improved_SIFT(object):
         self.kp_pyr = kp_pyr
         self.feats = feats
 
-        return feats
+return feats
