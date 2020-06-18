@@ -111,60 +111,60 @@ def elli_des():
                                     			if abs(i)>abs(j):
 #                                         		y=2 finding x
                                         			if i*i+j*j<=1:
-                                            				c[2*8+floor(x/45)+1]=c[2*8+floor(x/45)+1]+mag[k1+i][j1+j]
+                                            				c(2*8+floor(x/45)+1)=c(2*8+floor(x/45)+1)+mag(k1+i,j1+j)
                                         			elif i*i+j*j <=4:
-                                            				c[6*8+floor(x/45)+1]=c[6*8+floor(x/45)+1]+mag[k1+i][j1+j]
+                                            				c(6*8+floor(x/45)+1)=c(6*8+floor(x/45)+1)+mag(k1+i,j1+j)
                                         			elif i*i+j*j <=9: 
-                                            				c[10*8+floor(x/45)+1]=c[10*8+floor(x/45)+1]+mag[k1+i][j1+j]
+                                            				c(10*8+floor(x/45)+1)=c(10*8+floor(x/45)+1)+mag(k1+i,j1+j)
                                         			elif i*i+j*j <=16: 
-                                            				c[14*8+floor(x/45)+1]=c[14*8+floor(x/45)+1]+mag[k1+i][j1+j] 
+                                            				c(14*8+floor(x/45)+1)=c(14*8+floor(x/45)+1)+mag(k1+i,j1+j) 
                                 			else:
 #                                 			y=1 finding x
                                     				if (i*i+j*j <=1):
-                                        				c[1*8+floor(x/45)+1]=c[1*8+floor(x/45)+1]+mag[k1+i][j1+j]
+                                        				c(1*8+floor(x/45)+1)=c(1*8+floor(x/45)+1)+mag(k1+i,j1+j)
                                     
                                     				elif i*i+j*j <=4:
-                                        				c[5*8+floor(x/45)+1]=c[5*8+floor(x/45)+1]+mag[k1+i][j1+j];
+                                        				c(5*8+floor(x/45)+1)=c(5*8+floor(x/45)+1)+mag(k1+i,j1+j);
                                    
                                     
                                     				elif i*i+j*j <=9: 
-                                        				c[9*8+floor(x/45)+1]=c[9*8+floor(x/45)+1]+mag[k1+i][j1+j];
+                                        				c(9*8+floor(x/45)+1)=c(9*8+floor(x/45)+1)+mag(k1+i,j1+j);
                                     				elif i*i+j*j<=16:
-                                        				c[13*8+floor(x/45)+1]=c[13*8+floor(x/45)+1]+mag[k1+i][j1+j];   
+                                        				c(13*8+floor(x/45)+1)=c(13*8+floor(x/45)+1)+mag(k1+i,j1+j);   
 
                             			if (i>=0 and j<=0):
 						        if( abs(i)>=abs(j)):
 						       #y=0 finding x
 						        	if (i*i+j*j<=1):
-									c[0*8+floor(x/45)+1]=c[0*8+floor(x/45)+1]+mag[k1+i][j1+j];
+									c(0*8+floor(x/45)+1)=c(0*8+floor(x/45)+1)+mag(k1+i,j1+j);
 						            
 						            	elif i*i+j*j <=4:
-						                	c[4*8+floor(x/45)+1]=c[4*8+floor(x/45)+1]+mag[k1+i][j1+j];
+						                	c(4*8+floor(x/45)+1)=c(4*8+floor(x/45)+1)+mag(k1+i,j1+j);
 						           
 						            
 						            	elif i*i+j*j <= 9:
-						                	c[8*8+floor(x/45)+1]=c[8*8+floor(x/45)+1]+mag[k1+i][j1+j];
+						                	c(8*8+floor(x/45)+1)=c(8*8+floor(x/45)+1)+mag(k1+i,j1+j);
 						   
 						        
 						            	elif i*i+j*j <=16:
-						            		c[12*8+floor(x/45)+1]=c[12*8+floor(x/45)+1]+mag[k1+i][j1+j];   
+						            		c(12*8+floor(x/45)+1)=c(12*8+floor(x/45)+1)+mag(k1+i,j1+j);   
 						            
 						   
 						        else:
 						        #y= 1
 						        	if i*i+j*j<=1:
-						               		c[1*8+floor(x/45)+1]=c[1*8+floor(x/45)+1]+mag[k1+i][j1+j];
+						               		c(1*8+floor(x/45)+1)=c(1*8+floor(x/45)+1)+mag(k1+i,j1+j);
 						            
 						           	elif i*i+j*j <=4:
-						                	c[5*8+floor(x/45)+1]=c[5*8+floor(x/45)+1]+mag[k1+i][j1+j];
+						                	c(5*8+floor(x/45)+1)=c(5*8+floor(x/45)+1)+mag(k1+i,j1+j);
 						           
 						            
 						            	elif i*i+j*j <= 9:
-						                	c[9*8+floor(x/45)+1]=c[9*8+floor(x/45)+1]+mag[k1+i][j1+j];
+						                	c(9*8+floor(x/45)+1)=c(9*8+floor(x/45)+1)+mag(k1+i,j1+j);
 						       
 						        
 						            	elif i*i+j*j <=16:
-						                	c[13*8+floor(x/45)+1]=c[13*8+floor(x/45)+1]+mag[k1+i][j1+j];   
+						                	c(13*8+floor(x/45)+1)=c(13*8+floor(x/45)+1)+mag(k1+i,j1+j);   
 						            
 						        
 						    
@@ -174,32 +174,32 @@ def elli_des():
 						        
 						        	if i*i+j*j<=1:
 						              
-						                	c[0*8+floor(x/45)+1]=c[0*8+floor(x/45)+1]+mag[k1+i][j1+j];
+						                	c(0*8+floor(x/45)+1)=(0*8+floor(x/45)+1)+mag(k1+i,j1+j);
 						            
 						            	elif i*i+j*j <=4:
-						                	c[4*8+floor(x/45)+1]=c[4*8+floor(x/45)+1]+mag[k1+i][j1+j];
+						                	c(4*8+floor(x/45)+1)=c(4*8+floor(x/45)+1)+mag(k1+i,j1+j);
 						           
 						            
 						            	elif i*i+j*j <= 9:
-						                	c[8*8+floor(x/45)+1]=c[8*8+floor(x/45)+1]+mag[k1+i][j1+j];
+						                	c(8*8+floor(x/45)+1)=c(8*8+floor(x/45)+1)+mag(k1+i,j1+j);
 						       
 						            
 						            	elif i*i+j*j <=16:
-						                	c[12*8+floor(x/45)+1]=c[12*8+floor(x/45)+1]+mag[k1+i][j1+j];   
+						                	c(12*8+floor(x/45)+1)=c(12*8+floor(x/45)+1)+mag(k1+i,j1+j);   
 
 						        else:
 						      
 						           	if i*i+j*j <=1:
-						           	     c[3*8+floor(x/45)+1]=c[3*8+floor(x/45)+1]+mag[k1+i][j1+j];
+						           	     c(3*8+floor(x/45)+1)=c(3*8+floor(x/45)+1)+mag(k1+i,j1+j);
 						            
 						            	elif i*i+j*j <=4:
-						                	c[7*8+floor(x/45)+1]=c[7*8+floor(x/45)+1]+mag[k1+i][j1+j];
+						                	c(7*8+floor(x/45)+1)=c(7*8+floor(x/45)+1)+mag(k1+i,j1+j);
 								elif i*i+j*j <= 9:
-						                	c[11*8+floor(x/45)+1]=c[11*8+floor(x/45)+1]+mag[k1+i][j1+j];
+						                	c(11*8+floor(x/45)+1)=c(11*8+floor(x/45)+1)+mag(k1+i,j1+j);
 						       
 						            
 						            	elif i*i+j*j <=16:
-						                	c[15*8+floor(x/45)+1]=c[15*8+floor(x/45)+1]+mag[k1+i][j1+j]; 
+						                	c(15*8+floor(x/45)+1)=c(15*8+floor(x/45)+1)+mag(k1+i,j1+j); 
 
 
 
